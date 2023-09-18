@@ -1,7 +1,15 @@
 @echo off && mode con cols=60 lines=40 && color 4f
 Title Remove Mac footprint
 
-REM Control if it already runs.
+REM Check Mac files
+IF NOT exist .fseventsd (
+  echo.
+  echo nothing to do!
+  timeout 3
+  exit
+)
+
+REM Check if it already runs.
 IF exist MrMacClean.bat_arbeitet.ps1 (
   echo MrMacClean is running!
   timeout 3
@@ -17,7 +25,7 @@ pause
 
 cd /
 
-REM Files in MACFILES will be deleted recursively
+REM Files in MACFILES will be deleted recursivly
 REM Feel free to add files or directories.
 
 set MACFILES[0]=.history
