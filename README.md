@@ -1,0 +1,2 @@
+# MrMacClean
+Remove Mac footprint
