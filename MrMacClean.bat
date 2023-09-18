@@ -17,7 +17,7 @@ pause
 
 cd /
 
-REM Files in MACFILES will be deleted recursivly
+REM Files in MACFILES will be deleted recursively
 REM Feel free to add files or directories.
 
 set MACFILES[0]=.history
