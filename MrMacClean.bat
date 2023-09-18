@@ -62,8 +62,6 @@ endlocal
 REM pause
 @echo Write-Output " " >> MrMacClean.bat_arbeitet.ps1
 @echo Write-Output "---" >> MrMacClean.bat_arbeitet.ps1
-REM @echo Timeout /T 10 >> MrMacClean.bat_arbeitet.ps1
-
 
 Powershell.exe -executionpolicy remotesigned -File MrMacClean.bat_arbeitet.ps1
 
