@@ -18,13 +18,16 @@ cd /
 
   REM Files in MACFILES will be deleted recursivly
   REM Feel free to add files or directories.
-  set MACFILES[0]=.history
-  set MACFILES[1]=.fseventsd
-  set MACFILES[2]=.Spotlight-V100
-  set MACFILES[3]=.Trashes
-  set MACFILES[4]=.TemporaryItems
-  set MACFILES[5]=.DS_Store
-  set MACFILES[6]=._
+  set root_MACFILES[0]=.DocumentRevisions-V100
+  set root_MACFILES[1]=.fseventsd
+  set root_MACFILES[2]=.Spotlight-V100
+  set root_MACFILES[3]=.Trashes
+  set root_MACFILES[4]=.TemporaryItems
+  set root_MACFILES[5]=.DS_Store
+  set root_MACFILES[6]=._
+
+  set recursive_MACFILES[0]=.DS_Store
+  set recursive_MACFILES[1]=._
 
 REM Check Mac files, if not exits do only last job. MACFILES[6]=._
 IF NOT exist .fseventsd (
@@ -33,29 +36,43 @@ IF NOT exist .fseventsd (
   set x=0
 )
 
-
+set x=0
+set y=0
+set z=1
 
 echo Start deleting ...
-setlocal enableDelayedExpansion
-  @echo $cnt=0 >> MrMacClean.bat_arbeitet.ps1
-:SymLoop
-if defined MACFILES[%x%] (
 
 REM Powershell is more evective.
 REM Create MrMacClean.bat_arbeitet.ps1, it will do the work. Delete once and forever.
 
-  @echo $I = Get-ChildItem -Path !MACFILES[%x%]!* -Recurse -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
+setlocal enableDelayedExpansion
+
+  @echo $cnt=0 >> MrMacClean.bat_arbeitet.ps1
+
+:SymLoop_root
+if defined root_MACFILES[%x%] (
+
+REM delete only in root dir
+  @echo $I = Get-ChildItem -Path !root_MACFILES[%x%]!* -Recurse -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
   @echo $cnt+=$I.Count >> MrMacClean.bat_arbeitet.ps1
   @echo  IF ^( $I ^){ Remove-Item $I.fullname -Recurse -ErrorAction SilentlyContinue -Force -Confirm:$false } >> MrMacClean.bat_arbeitet.ps1
+  @echo Write-Output " %z%) !root_MACFILES[%x%]!" >> MrMacClean.bat_arbeitet.ps1
 
-  @echo $a+=1 >> MrMacClean.bat_arbeitet.ps1
-  @echo $I = Get-ChildItem -Path !MACFILES[%x%]! -Recurse -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
+  set /a x=x+1
+  set /a z=z+1
+  GOTO :SymLoop_root
+)
+
+:SymLoop_recu
+if defined recursive_MACFILES[%y%] (
+
+
+  @echo $I = Get-ChildItem -Path !recursive_MACFILES[%y%]! -Recurse -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
   @echo $cnt+=$I.Count >> MrMacClean.bat_arbeitet.ps1
   @echo IF ^( $I ^){ Remove-Item $I.fullname -Recurse -Force -ErrorAction SilentlyContinue -Confirm:$false } >> MrMacClean.bat_arbeitet.ps1
-  @echo Write-Output " $a) !MACFILES[%x%]!" >> MrMacClean.bat_arbeitet.ps1
-
-  set /a x+=1
-  GOTO :SymLoop
+ 
+  set /a y+=1
+  GOTO :SymLoop_recu
 )
 endlocal
 
