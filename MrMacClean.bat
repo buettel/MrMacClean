@@ -23,11 +23,18 @@ cd /
   set root_MACFILES[2]=.Spotlight-V100
   set root_MACFILES[3]=.Trashes
   set root_MACFILES[4]=.TemporaryItems
-  set root_MACFILES[5]=.DS_Store
-  set root_MACFILES[6]=._
+  set root_MACFILES[5]=.VolumeIcon.icns
+  set root_MACFILES[6]=.com.apple.timemachine.donotpresent
+  
+  set root_MACFILES[7]=.DS_Store
+  set root_MACFILES[8]=.AppleDouble
+  set root_MACFILES[9]=.LSOverride
+  set root_MACFILES[10]=._
 
   set recursive_MACFILES[0]=.DS_Store
-  set recursive_MACFILES[1]=._
+  set recursive_MACFILES[1]=.AppleDouble
+  set recursive_MACFILES[2]=.LSOverride
+  set recursive_MACFILES[3]=._
 
 REM Check Mac files, if not exits do only last job. MACFILES[6]=._
 IF NOT exist .fseventsd (
