@@ -8,15 +8,20 @@ TODO: root of a volume and not recursive, make the difference.
 
 Removes Mac files and directories:
 ### root of a Volume
-* .history
-* .fseventsd
-* .Spotlight-V100
-* .Trashes
-* .TemporaryItems
+
+- .DocumentRevisions-V100
+- .fseventsd
+- .Spotlight-V100
+- .Trashes
+- .TemporaryItems
+- .VolumeIcon.icns
+- .com.apple.timemachine.donotpresent
 
 ### recursive
-* .DS_Store
-* ._
+- .DS_Store
+- .AppleDouble
+- .LSOverride
+- ._
 
 and more ... just add to the script, but it deletes. It is not reversible.
 
