@@ -60,7 +60,7 @@ setlocal enableDelayedExpansion
 if defined root_MACFILES[%x%] (
 
 REM delete only in root dir
-  @echo $I = Get-ChildItem -Path !root_MACFILES[%x%]!* -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
+  @echo $I = Get-ChildItem -Path !root_MACFILES[%x%]!* -Recurse -Force -ErrorAction SilentlyContinue >> MrMacClean.bat_arbeitet.ps1
   @echo $cnt+=$I.Count >> MrMacClean.bat_arbeitet.ps1
   @echo  IF ^( $I ^){ Remove-Item $I.fullname -Recurse -ErrorAction SilentlyContinue -Force -Confirm:$false } >> MrMacClean.bat_arbeitet.ps1
   @echo Write-Output " %z%) !root_MACFILES[%x%]!" >> MrMacClean.bat_arbeitet.ps1
